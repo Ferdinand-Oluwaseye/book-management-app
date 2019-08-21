@@ -11,7 +11,7 @@ app.use(cors({origin: true}));
 
 app.use(express.json());
 
-app.use("/book", todoRoutes);
+app.use("/book", bookRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
