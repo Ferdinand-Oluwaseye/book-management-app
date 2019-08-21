@@ -36,7 +36,7 @@ router.route('/edit/:id').get( (req, res) => {
 
 
 router.delete('/delete/:id',(req,res) => {
-    bookScheme.BookModel.findByIdAndRemove({_id: req.params.id},(req,res){
+    bookScheme.BookModel.findByIdAndRemove({_id: req.params.id},(req,res) => {
         if(err){
             res.json(err);
         }else{
