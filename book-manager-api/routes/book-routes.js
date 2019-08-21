@@ -3,16 +3,29 @@ var router = express.Router();
 var bookScheme = require('../schema/book-schema.js')
 
 
+router.get('/', async (req, res) => {
+    const books = await bookScheme.BookModel.find(req.params.book_name);
+    res.status(200).send(books);
 
-router.get('/', (res,req,next) => {
-    bookScheme.BookModel.find(function (err,books){
-        if(err){
-            console.log(err);
-        }else{
-            res.json(books);
-        }
-    })
 });
+
+
+//Problematic get request
+// router.get('/', (res,req) => {
+//     // const bookItem = bookScheme.BookModel.find({name:req.params.book_name}).then(
+//     //     (bookItem) => {
+//     //         res.status(200).send(JSON.stringify(bookItem));
+//     //     }
+//     // )
+//     // bookScheme.BookModel.find(function (err,books){
+//     //     if(err){
+//     //         console.log(err);
+//     //     }else{
+//     //         // res.send(JSON.stringify(books));
+//     //         res.status(200).send(JSON.stringify(bookItem)); 
+//     //     }
+//     // })
+// });
 
 
 router.post('/add', (req,res) => {
@@ -26,7 +39,7 @@ router.post('/add', (req,res) => {
         });
 });
 
-router.route('/edit/:id').get( (req, res) => {
+router.get('/edit/:id', (req, res) => {
     let id = req.params.id;
     bookScheme.BookModel.findById(id, (err, book) => {
         res.json(book);
