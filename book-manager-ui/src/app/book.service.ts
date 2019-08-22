@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookService {
 
-  uri = 'http://localhost:4000/business';
+  uri = 'http://localhost:9000/book';
 
   constructor(private http: HttpClient) { }
 
@@ -19,5 +19,16 @@ export class BookService {
     console.log(obj);
     this.http.post(`${this.uri}/add`, obj)
         .subscribe(res => console.log('Done'));
+  }
+
+
+  // clicked(){
+  //   document.write('Done')
+  // }
+
+  getBooks(){
+    return this
+      .http
+      .get(`${this.uri}`);
   }
 }

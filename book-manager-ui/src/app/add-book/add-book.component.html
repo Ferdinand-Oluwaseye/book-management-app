@@ -29,7 +29,7 @@
         </div>
         <div *ngIf="angForm.controls['book_name'].invalid && (angForm.controls['book_name'].dirty || angForm.controls['book_name'].touched)" class="alert alert-danger">
           <div *ngIf="angForm.controls['book_name'].errors.required">
-            Person Name is required.
+            Book Name is required.
           </div>
         </div>
         <div class="form-group">
@@ -38,7 +38,7 @@
         </div>
         <div *ngIf="angForm.controls['author_name'].invalid && (angForm.controls['author_name'].dirty || angForm.controls['author_name'].touched)" class="alert alert-danger">
           <div *ngIf="angForm.controls['author_name'].errors.required">
-            Person Business is required.
+            AUthor name is required.
           </div>
         </div>
         <div class="form-group">
@@ -47,11 +47,12 @@
         </div>
         <div *ngIf="angForm.controls['serial_number'].invalid && (angForm.controls['serial_number'].dirty || angForm.controls['serial_number'].touched)" class="alert alert-danger">
           <div *ngIf="angForm.controls['serial_number'].errors.required">
-            Business GST Number is required.
+            Serial Number is required.
           </div>
         </div>
         <div class="form-group">
             <button (click)="addBook(book_name.value, author_name.value, serial_number.value)"
+                    
                 [disabled]="angForm.pristine || angForm.invalid" 
                 class="btn btn-primary">
                 Add Book
