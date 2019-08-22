@@ -46,17 +46,27 @@ router.get('/edit/:id', (req, res) => {
     });
 });
 
+router.delete('/deleteBook/:_id', async(req,res) => {
+    try {
+        await bookScheme.BookModel.findByIdAndDelete(req.params._id);
+        res.status(200).json("Book removed");
+    } catch (error) {
+        // console.log({ message: error.message});
+        res.status(400).send("unable to delete from db");
+        return;
+    }
 
-
-router.delete('/delete/:id',(req,res) => {
-    bookScheme.BookModel.findByIdAndRemove({_id: req.params.id},(req,res) => {
-        if(err){
-            res.json(err);
-        }else{
-            res.json('removed successfully');
-        }
-    });
 });
+
+// router.get('/delete/:id',(req,res) => {
+//     bookScheme.BookModel.findByIdAndRemove({_id: req.params._id},(req,res) => {
+//         if(err){
+//             res.json(err);
+//         }else{
+//             res.json('removed successfully');
+//         }
+//     });
+// });
 
 router.get('/update/:id',(req,res) => {
     bookScheme.BookModel.findById(req.params.id, (err,next,book) =>{
