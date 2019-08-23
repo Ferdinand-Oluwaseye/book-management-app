@@ -28,7 +28,25 @@ export class BookService {
 
   getBooks(){
     return this
-      .http
-      .get(`${this.uri}`);
+            .http
+            .get(`${this.uri}`);
+  }
+
+  editBook(id){
+    return this
+            .http
+            .get(`${this.uri}/edit/${id}`);
+            
+  }
+
+  updateBook(book_name, author_name, serial_number, id) {
+    const obj = {
+      book_name: book_name,
+      author_name: author_name,
+      serial_number: serial_number
+    };
+    console.log(obj);
+    this.http.post(`${this.uri}/update/${id}`, obj)
+        .subscribe(res => console.log('Done'));
   }
 }
