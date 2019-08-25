@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var bookScheme = require('../schema/book-schema.js')
+var Book = require('../schema/book-schema.js')
 
 
 router.get('/', async (req, res) => {
-    const books = await bookScheme.BookModel.find(req.params.book_name);
+    const books = await Book.find(req.params.book_name);
     res.status(200).send(books);
 
 });
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
 
 router.post('/add', (req,res) => {
-    let book = new bookScheme.BookModel(req.body);
+    let book = new Book(req.body);
     book.save()
         .then(book =>{
             res.status(200).json({'book':'book added successfully'});
@@ -41,14 +41,14 @@ router.post('/add', (req,res) => {
 
 router.get('/edit/:id', (req, res) => {
     let id = req.params.id;
-    bookScheme.BookModel.findById(id, (err, book) => {
+    Book.findById(id, (err, book) => {
         res.json(book);
     });
 });
 
 router.delete('/deleteBook/:_id', async(req,res) => {
     try {
-        await bookScheme.BookModel.findByIdAndDelete(req.params._id);
+        await Book.findByIdAndDelete(req.params._id);
         res.status(200).json("Book removed");
     } catch (error) {
         // console.log({ message: error.message});
@@ -68,26 +68,34 @@ router.delete('/deleteBook/:_id', async(req,res) => {
 //     });
 // });
 
-router.get('/update/:id',(req,res) => {
-    bookScheme.BookModel.findById(req.params.id, (err,next,book) =>{
-        if(!book){
-            return next(new Error('Could not load DOcument'))
-        }else{
-            book.book_name = req.body.book_name;
-            book.author_name = req.body.author_name;
-            book.serial_number = req.body.serial_number;
+// router.post('/update/:id',(req,res) => {
+//     Book.findByIdAndUpdate(req.params.id, (err,next,book) => {
+//         // if(!book){
+//         //     // return next(new Error('Could not load Document'))
+//         //     res.status(400).send("not a book");
+//         // }else{
+            
+//             Book.book_name = req.body.book_name;
+//             Book.author_name = req.body.author_name;
+//             Book.serial_number = req.body.serial_number;
 
-            book.save().then(book => {
-                res.json('Update done')
-            })
-            .catch(err => {
-                res.status(400).send("unable to update the database");
-            })
-        }
+//             book.save().then(book => {
+//                 res.json('Update done')
+//             })
+//             .catch(err => {
+//                 res.status(400).send("unable to update the database");
+//             });
+//         // }
+//     });
+// });
+
+
+
+router.put('/update/:id', function(req, res, next) {
+    Book.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+      if (err) return next(err);
+      res.json(post);
     });
-});
-
-
-
+  });
 
 module.exports = router;

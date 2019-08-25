@@ -21,4 +21,11 @@ export class ViewBookComponent implements OnInit {
       });
   }
 
+  deleteBook(id){
+    this.bs.deleteBook(id);
+    
+    
+  }
+  
+
 }

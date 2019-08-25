@@ -16,7 +16,7 @@ export class BookService {
       author_name: author_name,
       serial_number: serial_number
     };
-    console.log(obj);
+    // console.log(obj);
     this.http.post(`${this.uri}/add`, obj)
         .subscribe(res => console.log('Done'));
   }
@@ -32,7 +32,7 @@ export class BookService {
             .get(`${this.uri}`);
   }
 
-  editBook(id){
+  editBook(id: any){
     return this
             .http
             .get(`${this.uri}/edit/${id}`);
@@ -46,7 +46,17 @@ export class BookService {
       serial_number: serial_number
     };
     console.log(obj);
-    this.http.post(`${this.uri}/update/${id}`, obj)
-        .subscribe(res => console.log('Done'));
+    this
+      .http
+      .put(`${this.uri}/update/${id}`, obj)
+      .subscribe(res => console.log('Done'));
+  }
+
+  deleteBook(id){
+   console.log("Deleting");
+   return this
+            .http
+            .delete(`${this.uri}/deleteBook/${id}`)
+            .subscribe(res => console.log('Deleted'));
   }
 }

@@ -38,7 +38,7 @@ export class EditBookComponent implements OnInit {
   }
 
   updateBook(book_name,author_name,serial_number){
-    this .route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.bs.updateBook(book_name,author_name,serial_number, params['id']);
       this.router.navigate(['book']);
     })

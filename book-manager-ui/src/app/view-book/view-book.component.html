@@ -14,7 +14,7 @@
             <td>{{ book.author_name }}</td>
             <td>{{ book.serial_number}}</td>
             <td><a [routerLink]="['/edit', book._id]" class="btn btn-primary">Edit</a></td>
-            <td><a [routerLink]="" class="btn btn-danger">Delete</a></td>
+            <td><a (click) = "deleteBook(book._id)" class="btn btn-danger">Delete</a></td>
         </tr>
     </tbody>
   </table>

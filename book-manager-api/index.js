@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 
 
-
+mongoose.set('useFindAndModify', false);
 mongoose.connect(
     config.app.MONGODB_URI,
     { useNewUrlParser: true })
