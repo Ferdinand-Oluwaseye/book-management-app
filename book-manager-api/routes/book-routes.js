@@ -68,6 +68,8 @@ router.delete('/deleteBook/:_id', async(req,res) => {
 //     });
 // });
 
+
+// post request to update that was not working
 // router.post('/update/:id',(req,res) => {
 //     Book.findByIdAndUpdate(req.params.id, (err,next,book) => {
 //         // if(!book){
