@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: api
-        image: api:latest
+        image: seyeferd1996/api:latest
         ports:
         - containerPort: 8080
