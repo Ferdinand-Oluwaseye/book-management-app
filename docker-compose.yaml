@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./book-manager-api
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./book-manager-api:/usr/src/app
+    working_dir: /usr/src/app
+    networks:
+      - mean-network
+
+  frontend:
+    build:
+      context: ./book-manager-ui
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+      - "49153:49153"
+    volumes:
+      - ./book-manager-ui:/usr/src/app
+    working_dir: /usr/src/app
+    networks:
+      - mean-network
+
+  mongodb:
+    image: mongo:latest
+    networks:
+      - mean-network
+
+networks:
+  mean-network:
+    driver: bridge
