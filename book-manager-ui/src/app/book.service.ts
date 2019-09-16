@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookService {
 
-  uri = 'http://' + process.env.API + ':9000/book';
+  uri = 'http://' + process.env.API_ENV + ':9000/book';
 
   constructor(private http: HttpClient) { }
 
